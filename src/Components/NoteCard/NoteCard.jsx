@@ -5,39 +5,36 @@ export default function NoteCard({
   setCurrentEditing,
   index,
   deleteNote,
+  isSelected,
 }) {
   return (
-    <div style={{ padding: "10px", borderBottom: "1px solid #ddd" }}>
-      <div style={{ display: "flex", alignItems: "center",gap: "10px", justifyContent: "space-between" }}>
-        <h2
-          style={{
-            margin: "0",
-            fontSize: "16px",
-            fontWeight: "normal",
-            cursor: "pointer",
-            flex: "1",
-            whiteSpace: "nowrap",
-            overflow: "hidden",
-            textOverflow: "ellipsis",
-          }}
-          onClick={() => setCurrentEditing(index)}
-        >
-          {title}
-        </h2>
-        <button
-          style={{
-            backgroundColor: "#ff4d4d",
-            color: "#fff",
-            border: "none",
-            borderRadius: "4px",
-            padding: "5px 10px",
-            cursor: "pointer",
-          }}
-          onClick={() => deleteNote(index)}
-        >
-          -
-        </button>
-      </div>
+    <div
+      style={{
+        display: "flex",
+        gap: "10px",
+        padding: "10px",
+        backgroundColor: isSelected ? "#62A5EB" : "",
+        cursor: "pointer",
+      }}
+      onClick={() => setCurrentEditing(index)}
+    >
+      <h2 style={{ flex: 1 }}>{title.substr(0, 20)}....</h2>
+      <button
+        style={{
+          width: "25px",
+          height: "25px",
+          backgroundColor: "red",
+          color: "white",
+          border: "none",
+          cursor: "pointer",
+        }}
+        onClick={(e) => {
+          e.stopPropagation();
+          deleteNote(index);
+        }}
+      >
+        -
+      </button>
     </div>
   );
 }
